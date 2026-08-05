@@ -86,10 +86,25 @@ body {
   color: var(--ink-soft);
 }
 
+/* Tailwind Preflight снимает маркеры со списков — возвращаем их
+   внутри колонки чтения, иначе перечисления и нумерованные
+   источники читаются как обычные абзацы */
 .prose-book ul,
 .prose-book ol {
   margin: 0 0 1.1em;
   padding-left: 1.4em;
+}
+
+.prose-book ul {
+  list-style: disc outside;
+}
+
+.prose-book ol {
+  list-style: decimal outside;
+}
+
+.prose-book li::marker {
+  color: var(--mute);
 }
 
 .prose-book li {
