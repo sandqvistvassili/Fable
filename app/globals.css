@@ -1307,3 +1307,120 @@ a.card:hover,
 .plateau-reset:hover {
   color: var(--text-2);
 }
+
+/* ─────────────────── единственная ежедневная победа ──────────────────── */
+
+/*
+  Оформление намеренно ровное: у «Сделал» и «Пока нет» одинаковый вес и
+  одинаковая форма. Ни зелёного, ни красного — в главе сказано, что счёт
+  обнуляется в полночь и ничего не копится, значит и подсветка не должна
+  ни награждать, ни упрекать.
+*/
+
+.win-lead {
+  font-size: 15.5px;
+  line-height: 1.62;
+  color: var(--text-2);
+  margin: 0 0 18px;
+}
+
+.win-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.win-form .panel-btn:disabled {
+  background: var(--surface-2);
+  color: var(--text-3);
+  cursor: default;
+}
+
+.win-examples {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.win-examples button {
+  font-family: var(--font-text);
+  font-size: 13.5px;
+  color: var(--text-2);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 7px 14px;
+  cursor: pointer;
+  transition: border-color 0.16s var(--ease), color 0.16s var(--ease);
+}
+
+.win-examples button:hover {
+  border-color: var(--border-strong);
+  color: var(--text);
+}
+
+.win-action {
+  font-size: 19px;
+  line-height: 1.45;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--text);
+  margin: 0 0 20px;
+}
+
+.win-answer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.win-btn {
+  font-family: var(--font-text);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-2);
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-xs);
+  padding: 11px 24px;
+  cursor: pointer;
+  transition: border-color 0.16s var(--ease), background 0.16s var(--ease),
+    color 0.16s var(--ease);
+}
+
+.win-btn:hover {
+  border-color: var(--text-3);
+}
+
+/* Оба выбранных состояния выглядят одинаково: отмечен ответ, а не оценка */
+.win-btn.is-done,
+.win-btn.is-pending {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.win-note {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--text-2);
+  margin: 18px 0 0;
+}
+
+.win-change {
+  background: none;
+  border: none;
+  padding: 0;
+  margin-top: 20px;
+  font-family: var(--font-text);
+  font-size: 13px;
+  color: var(--text-3);
+  cursor: pointer;
+  transition: color 0.16s var(--ease);
+}
+
+.win-change:hover {
+  color: var(--text-2);
+}
