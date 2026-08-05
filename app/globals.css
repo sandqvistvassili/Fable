@@ -343,6 +343,31 @@ body {
   border-radius: var(--radius-lg);
   color: var(--panel-ink);
   padding: 22px;
+  /* Браузер рисует стрелки числового поля и значок календаря по своей теме.
+     Без этого на тёмной панели они выглядят как белые прямоугольники. */
+  color-scheme: dark;
+}
+
+/* Стрелки-крутилки в поле веса только мешают: вес набирают с клавиатуры,
+   а попасть по ним на телефоне всё равно невозможно */
+.panel input[type='number'] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+.panel input[type='number']::-webkit-outer-spin-button,
+.panel input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.panel input[type='date']::-webkit-calendar-picker-indicator {
+  opacity: 0.55;
+  cursor: pointer;
+}
+
+.panel input[type='date']::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
 }
 
 .panel-label {

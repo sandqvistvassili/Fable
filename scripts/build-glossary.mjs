@@ -19,19 +19,72 @@ const HOMOGLYPHS = {
   А: 'A', В: 'B', Е: 'E', К: 'K', М: 'M', Н: 'H', О: 'O', Р: 'P', С: 'C', Т: 'T', Х: 'X',
 }
 
+// Свёртка применяется только внутри аббревиатур — там, где соседний символ
+// тоже заглавный или цифра. Иначе «Натуральные» превращается в «Hатуральные»
+// с латинской H, и слово перестаёт совпадать само с собой.
 function foldHomoglyphs(s) {
-  return s.replace(/[АВЕКМНОРСТХ]/g, (c) => HOMOGLYPHS[c] || c)
+  const upper = (c) => c !== undefined && (/[A-ZА-ЯЁ0-9]/.test(c))
+  return s.replace(/[АВЕКМНОРСТХ]/g, (c, i) =>
+    upper(s[i - 1]) || upper(s[i + 1]) ? HOMOGLYPHS[c] : c,
+  )
 }
 
-/** Ключ для сличения: без скобок, регистра и разнобоя алфавитов */
+// Типографские варианты одного термина: VO2max и VO₂max — одно и то же,
+// но для сравнения строк это разные слова. Сюда же тире разных видов и ё/е.
+const SUB = { '₀': '0', '₁': '1', '₂': '2', '₃': '3', '₄': '4', '₅': '5', '₆': '6', '₇': '7', '₈': '8', '₉': '9' }
+const SUP = { '⁰': '0', '¹': '1', '²': '2', '³': '3', '⁴': '4', '⁵': '5', '⁶': '6', '⁷': '7', '⁸': '8', '⁹': '9' }
+
+function foldTypography(s) {
+  return s
+    .replace(/[₀-₉]/g, (c) => SUB[c] ?? c)
+    .replace(/[⁰¹²³⁴-⁹]/g, (c) => SUP[c] ?? c)
+    .replace(/[–—−]/g, '-')
+    .replace(/ /g, ' ')
+    .replace(/ё/g, 'е')
+    .replace(/Ё/g, 'Е')
+}
+
+/** Ключ для сличения: без скобок, регистра и разнобоя написаний */
 function normKey(name) {
-  return foldHomoglyphs(name)
+  return foldTypography(foldHomoglyphs(name))
     .replace(/\([^)]*\)/g, ' ')
     .replace(/\s*\/\s*/g, ' ')
     .replace(/[«»"'`]/g, '')
     .replace(/\s+/g, ' ')
     .trim()
     .toLowerCase()
+}
+
+/**
+ * Ключ по мешку слов — ловит перевёрнутые аббревиатуры:
+ * «ЛГ (лютеинизирующий гормон)» и «Лютеинизирующий гормон (ЛГ)».
+ * Обычный ключ их не сводит, потому что после снятия скобок остаются
+ * разные строки.
+ */
+function bagKey(name) {
+  const s = foldTypography(foldHomoglyphs(name)).replace(/[()«»"'`/,.]/g, ' ')
+  const words = (s.toLowerCase().match(/[\wа-я]+/g) || []).filter((w) => w.length > 1)
+  return [...new Set(words)].sort().join('|')
+}
+
+/**
+ * Насколько определение годится для общего словаря.
+ * Длина — плюс, но выводы конкретной статьи — минус: определение
+ * VO₂max, где сказано «снижен у хронических вейперов», описывает не термин,
+ * а находку одного исследования.
+ */
+const CONTEXT_MARKERS =
+  /у (хронических )?(вейпер|курильщ|бегун|пациент|диабет|подрост)|по сравнению с сопоставим|в контролируемых исследованиях|в этом исследовании/i
+
+function definitionScore(def) {
+  return def.length - (CONTEXT_MARKERS.test(def) ? 400 : 0)
+}
+
+/** Из двух написаний предпочитаем то, что начинается с кириллицы */
+function preferredName(a, b) {
+  const cyr = (s) => /^[А-ЯЁа-яё]/.test(s)
+  if (cyr(a) !== cyr(b)) return cyr(a) ? a : b
+  return a.length >= b.length ? a : b
 }
 
 // ------------------------------------------- английские названия добавок
@@ -140,6 +193,7 @@ for (const f of fs.readdirSync(BLOG).filter((n) => n.endsWith('.mdx'))) {
 
 // Сведение: у 142 терминов несколько определений из разных статей.
 // Берём самое полное, остальные статьи запоминаем как «где ещё разобрано».
+const mergedInverted = []
 const byKey = new Map()
 for (const t of articles) {
   const key = normKey(t.name)
@@ -149,13 +203,47 @@ for (const t of articles) {
     byKey.set(key, { key, name: t.name, definition: t.definition, sources: [t.source] })
   } else {
     if (!cur.sources.includes(t.source)) cur.sources.push(t.source)
-    // Полнее — значит информативнее; заодно предпочитаем вариант с расшифровкой в скобках
-    const better =
-      t.definition.length > cur.definition.length ||
-      (t.name.includes('(') && !cur.name.includes('('))
-    if (t.definition.length > cur.definition.length) cur.definition = t.definition
-    if (better && t.name.includes('(') && !cur.name.includes('(')) cur.name = t.name
+    if (definitionScore(t.definition) > definitionScore(cur.definition)) {
+      cur.definition = t.definition
+    }
+    if (t.name.includes('(') && !cur.name.includes('(')) cur.name = t.name
   }
+}
+
+// Синонимы, которые автоматика не поймает: разные слова про одно и то же.
+// Ключ — что сводим, значение — во что.
+const SYNONYMS = {
+  'ахлоргидрия гипохлоргидрия': 'ахлоргидрия',
+  'сывороточный белок': 'сывороточный протеин',
+}
+for (const [from, to] of Object.entries(SYNONYMS)) {
+  const src = byKey.get(from)
+  const dst = byKey.get(to)
+  if (!src || !dst) continue
+  if (definitionScore(src.definition) > definitionScore(dst.definition)) {
+    dst.definition = src.definition
+  }
+  for (const s of src.sources) if (!dst.sources.includes(s)) dst.sources.push(s)
+  byKey.delete(from)
+  mergedInverted.push(`${dst.name} ← ${src.name}`)
+}
+
+// Второй проход: сводим перевёрнутые аббревиатуры
+const byBag = new Map()
+for (const t of byKey.values()) {
+  const bk = bagKey(t.name)
+  const cur = byBag.get(bk)
+  if (!cur) {
+    byBag.set(bk, t)
+    continue
+  }
+  cur.name = preferredName(cur.name, t.name)
+  if (definitionScore(t.definition) > definitionScore(cur.definition)) {
+    cur.definition = t.definition
+  }
+  for (const s of t.sources) if (!cur.sources.includes(s)) cur.sources.push(s)
+  byKey.delete(t.key)
+  mergedInverted.push(`${cur.name} ← ${t.name}`)
 }
 
 // Добавки: если термин уже пришёл из статьи — дополняем, иначе заводим новый
@@ -189,6 +277,8 @@ terms.sort((a, b) => a.name.localeCompare(b.name, 'ru'))
 
 fs.writeFileSync(OUT, JSON.stringify({ terms }, null, 2) + '\n', 'utf8')
 
+console.log(`сведено перевёрнутых записей: ${mergedInverted.length}`)
+for (const m of mergedInverted) console.log('   ' + m)
 console.log(`определений в статьях: ${articles.length}`)
 console.log(`уникальных терминов после сведения: ${terms.length}`)
 console.log(`терминов из нескольких статей: ${terms.filter((t) => t.sources.length > 1).length}`)
