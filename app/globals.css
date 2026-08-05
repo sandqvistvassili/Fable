@@ -135,6 +135,27 @@ body {
   border-bottom: none;
 }
 
+/* Врезка с исследованием — в статьях оформлена цитатой */
+.prose-book blockquote {
+  margin: 1.5em 0;
+  padding: 14px 18px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--blue);
+  border-radius: var(--radius-sm);
+  font-size: 0.94em;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+.prose-book blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+.prose-book blockquote em {
+  font-style: normal;
+}
+
 .prose-book hr {
   border: none;
   border-top: 1px solid var(--line);

@@ -6,6 +6,7 @@ import { SITE_URL, SITE_NAME } from '@/lib/site'
 import ReadingProgress from '@/components/ReadingProgress'
 import ChapterTOC from '@/components/ChapterTOC'
 import ChapterNav from '@/components/ChapterNav'
+import ChapterArticles from '@/components/ChapterArticles'
 
 export const dynamicParams = false
 
@@ -103,6 +104,8 @@ export default async function ChapterPage({
         <article>
           <Content />
         </article>
+
+        <ChapterArticles chapterSlug={slug} />
 
         <ChapterNav prev={prev} next={next} />
       </main>

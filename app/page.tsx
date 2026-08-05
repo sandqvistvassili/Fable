@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
 import { chapters } from '@/lib/chapters'
+import { articles } from '@/lib/blog'
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION } from '@/lib/site'
 
 export const metadata: Metadata = {
@@ -88,6 +89,14 @@ export default function Home() {
       <p style={{ color: 'var(--mute)', fontSize: '15px' }}>
         13 глав, около 70 минут чтения. Без регистрации: инструменты внутри руководства
         работают прямо в браузере, данные не покидают твоё устройство.
+      </p>
+
+      <p style={{ marginTop: '28px', paddingTop: '24px', borderTop: '1px solid var(--line)' }}>
+        Если нужен разбор отдельного вопроса, а не всё подряд —{' '}
+        <Link href="/blog" style={{ color: 'var(--blue)' }}>
+          {articles.length} статей
+        </Link>{' '}
+        по питанию, тренировкам, добавкам и психологии, каждая с механизмом и источниками.
       </p>
     </main>
   )
