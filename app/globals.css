@@ -849,6 +849,7 @@ a.card:hover,
 }
 
 .search-trigger kbd {
+  font-family: var(--font-text);
   font-size: 11px;
   color: var(--text-3);
   background: var(--surface-2);
@@ -1036,17 +1037,15 @@ a.card:hover,
   grid-template-columns: 34px minmax(0, 1fr) auto;
   gap: 18px;
   align-items: baseline;
-  padding: 20px 8px;
+  padding: 20px 14px;
   border-bottom: 1px solid var(--border);
   text-decoration: none;
   color: var(--text);
-  transition: background 0.16s var(--ease), padding 0.2s var(--ease);
+  transition: background 0.18s var(--ease);
 }
 
 .chapter-list a:hover {
   background: var(--surface);
-  padding-left: 14px;
-  padding-right: 14px;
 }
 
 .chapter-list .n {
@@ -1063,8 +1062,7 @@ a.card:hover,
 }
 
 .chapter-list .m {
-  font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 12.5px;
   color: var(--text-3);
   white-space: nowrap;
 }

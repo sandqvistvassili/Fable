@@ -45,8 +45,8 @@ export default function ChapterSidebar({ currentSlug }: { currentSlug: string })
         <Link href="/guide" className="sidebar-title">
           Руководство
         </Link>
-        <p className="sidebar-meta num">
-          13 глав · {totalMinutes} мин
+        <p className="sidebar-meta">
+          <span className="num">13</span> глав · <span className="num">{totalMinutes}</span> мин
         </p>
 
         <ol className="sidebar-list">
@@ -74,8 +74,9 @@ export default function ChapterSidebar({ currentSlug }: { currentSlug: string })
         </ol>
 
         {current && (
-          <p className="sidebar-status num" aria-live="polite">
-            Глава {current.order} · прочитано {pct}%
+          <p className="sidebar-status" aria-live="polite">
+            Глава <span className="num">{current.order}</span> · прочитано{' '}
+            <span className="num">{pct}%</span>
           </p>
         )}
       </div>

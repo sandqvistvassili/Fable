@@ -128,8 +128,8 @@ export default function Home() {
             >
               Содержание
             </h2>
-            <span className="num" style={{ fontSize: 13, color: 'var(--text-3)' }}>
-              {totalMinutes} мин
+            <span style={{ fontSize: 13, color: 'var(--text-3)' }}>
+              <span className="num">{totalMinutes}</span> мин
             </span>
           </div>
 
@@ -139,7 +139,7 @@ export default function Home() {
                 <Link href={`/guide/${c.slug}`}>
                   <span className="n">{String(c.order).padStart(2, '0')}</span>
                   <span className="t">{c.title}</span>
-                  <span className="m">{c.minutes} мин</span>
+                  <span className="m"><span className="num">{c.minutes}</span> мин</span>
                 </Link>
               </li>
             ))}

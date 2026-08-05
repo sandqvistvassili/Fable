@@ -106,9 +106,13 @@ export default async function ChapterPage({
               <p className="chapter-eyebrow">
                 <Link href="/guide">Руководство</Link>
                 <span aria-hidden>·</span>
-                <span className="num">Глава {chapter.order}</span>
+                <span>
+                  Глава <span className="num">{chapter.order}</span>
+                </span>
                 <span aria-hidden>·</span>
-                <span className="num">{chapter.minutes} мин</span>
+                <span>
+                  <span className="num">{chapter.minutes}</span> мин
+                </span>
               </p>
             </header>
 
