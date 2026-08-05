@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { getTerm } from '@/lib/glossary'
 
-// Термин книги: пунктирное подчёркивание цветом --done (у Proof — сплошное
+// Термин руководства: пунктирное подчёркивание цветом --done (у Proof — сплошное
 // синее, чтобы механизмы визуально не путались). По клику раскрывается
 // определение из глоссария. Карточка на span'ах — компонент живёт внутри <p>.
 export default function Term({ id, children }: { id: string; children: React.ReactNode }) {
@@ -46,7 +46,7 @@ export default function Term({ id, children }: { id: string; children: React.Rea
               marginBottom: '6px',
             }}
           >
-            Термин книги
+            Термин
           </span>
           <span style={{ display: 'block', fontWeight: 600, marginBottom: '4px' }}>
             {term.name}

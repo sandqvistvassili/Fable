@@ -7,9 +7,9 @@ export const dynamic = 'force-static'
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: SITE_URL, priority: 1 },
-    { url: `${SITE_URL}/book`, priority: 0.9 },
+    { url: `${SITE_URL}/guide`, priority: 0.9 },
     ...chapters.map((c) => ({
-      url: `${SITE_URL}/book/${c.slug}`,
+      url: `${SITE_URL}/guide/${c.slug}`,
       priority: 0.8,
     })),
     { url: `${SITE_URL}/glossary`, priority: 0.5 },

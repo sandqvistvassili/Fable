@@ -8,7 +8,7 @@ import WidgetFrame from './WidgetFrame'
 // Результат хранится в localStorage браузера, чтобы не потеряться при
 // дальнейшем чтении; никуда не отправляется.
 
-const STORAGE_KEY = 'kniga:calculator'
+const STORAGE_KEY = 'guide:calculator'
 
 const ACTIVITY = [
   { value: '1.2', label: 'Малоподвижный' },

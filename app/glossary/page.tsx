@@ -14,15 +14,15 @@ export default function GlossaryPage() {
   return (
     <main className="prose-book" style={{ padding: '48px 20px 80px' }}>
       <nav aria-label="Хлебные крошки" style={{ fontSize: '15px', margin: '0 0 24px' }}>
-        <Link href="/book" style={{ color: 'var(--mute)', textDecoration: 'none' }}>
-          Книга
+        <Link href="/guide" style={{ color: 'var(--mute)', textDecoration: 'none' }}>
+          Руководство
         </Link>
         <span style={{ color: 'var(--mute)' }}> / </span>
         <span style={{ color: 'var(--ink-soft)' }}>Карта терминов</span>
       </nav>
       <h1 style={{ fontSize: '1.9em', fontWeight: 600, margin: '0 0 12px' }}>Карта терминов</h1>
       <p style={{ color: 'var(--ink-soft)', margin: '0 0 32px' }}>
-        Ключевые понятия книги в одном месте. В тексте глав каждый термин подчёркнут
+        Ключевые понятия руководства в одном месте. В тексте глав каждый термин подчёркнут
         пунктиром — определение открывается по клику, не прерывая чтения.
       </p>
       <dl style={{ margin: 0 }}>

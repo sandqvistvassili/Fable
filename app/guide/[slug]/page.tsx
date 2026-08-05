@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { chapters, getChapter, getPrevNext } from '@/lib/chapters'
-import { SITE_URL } from '@/lib/site'
+import { SITE_URL, SITE_NAME } from '@/lib/site'
 import ReadingProgress from '@/components/ReadingProgress'
 import ChapterTOC from '@/components/ChapterTOC'
 import ChapterNav from '@/components/ChapterNav'
@@ -24,12 +24,12 @@ export async function generateMetadata({
   return {
     title: chapter.seoTitle,
     description: chapter.description,
-    alternates: { canonical: `${SITE_URL}/book/${chapter.slug}` },
+    alternates: { canonical: `${SITE_URL}/guide/${chapter.slug}` },
     openGraph: {
       type: 'article',
       title: chapter.seoTitle,
       description: chapter.description,
-      url: `${SITE_URL}/book/${chapter.slug}`,
+      url: `${SITE_URL}/guide/${chapter.slug}`,
     },
   }
 }
@@ -56,11 +56,11 @@ export default async function ChapterPage({
       inLanguage: 'ru',
       position: chapter.order,
       isPartOf: {
-        '@type': 'Book',
-        name: 'Руководство, которого у тебя никогда не было',
+        '@type': 'CreativeWorkSeries',
+        name: SITE_NAME,
         url: SITE_URL,
       },
-      mainEntityOfPage: `${SITE_URL}/book/${chapter.slug}`,
+      mainEntityOfPage: `${SITE_URL}/guide/${chapter.slug}`,
     },
     {
       '@context': 'https://schema.org',
@@ -69,14 +69,14 @@ export default async function ChapterPage({
         {
           '@type': 'ListItem',
           position: 1,
-          name: 'Книга',
-          item: `${SITE_URL}/book`,
+          name: 'Руководство',
+          item: `${SITE_URL}/guide`,
         },
         {
           '@type': 'ListItem',
           position: 2,
           name: chapter.title,
-          item: `${SITE_URL}/book/${chapter.slug}`,
+          item: `${SITE_URL}/guide/${chapter.slug}`,
         },
       ],
     },
@@ -91,8 +91,8 @@ export default async function ChapterPage({
       <ReadingProgress />
       <main className="prose-book" style={{ padding: '40px 20px 80px' }}>
         <nav aria-label="Хлебные крошки" style={{ fontSize: '15px', margin: '0 0 24px' }}>
-          <Link href="/book" style={{ color: 'var(--mute)', textDecoration: 'none' }}>
-            Книга
+          <Link href="/guide" style={{ color: 'var(--mute)', textDecoration: 'none' }}>
+            Руководство
           </Link>
           <span style={{ color: 'var(--mute)' }}> / </span>
           <span style={{ color: 'var(--ink-soft)' }}>{chapter.title}</span>

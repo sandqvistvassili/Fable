@@ -6,10 +6,10 @@ import WeightChart from './WeightChart'
 
 // Живой трекер веса. Данные живут только в localStorage этого браузера:
 // без аккаунта и без сервера. Сознательно нет серий, очков и подсветки
-// пропущенных дней — это прямое следствие текста книги (глава про ЕЕП):
+// пропущенных дней — это прямое следствие текста руководства (глава про ЕЕП):
 // пропущенный день просто отсутствует, в полночь ничего не «сгорает».
 
-const STORAGE_KEY = 'kniga:weight-entries'
+const STORAGE_KEY = 'guide:weight-entries'
 
 type Entry = { date: string; weight: number }
 
@@ -51,7 +51,7 @@ function dayNumber(dateStr: string): number {
   return Math.round(Date.parse(`${dateStr}T12:00:00`) / 86_400_000)
 }
 
-/** Недельное среднее по формуле книги: три последних записи недели, сумма / 3 */
+/** Недельное среднее по формуле из текста: три последних записи недели, сумма / 3 */
 function weeklyAverages(entries: Entry[]) {
   const byWeek = new Map<string, Entry[]>()
   for (const e of entries) {

@@ -1,11 +1,11 @@
 export type Chapter = {
   /** Порядковый номер, 1–13 */
   order: number
-  /** URL: /book/[slug] */
+  /** URL: /guide/[slug] */
   slug: string
   /** Имя MDX-файла в content/chapters без расширения */
   file: string
-  /** H1 главы — как в книге */
+  /** H1 главы — как в исходном тексте */
   title: string
   /** Meta title под поисковые запросы (из SEO-файла) */
   seoTitle: string

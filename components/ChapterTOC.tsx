@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { chapters } from '@/lib/chapters'
 
-// Краткое оглавление всей книги в начале главы. Сворачиваемое, без JS.
+// Краткое оглавление всего руководства в начале главы. Сворачиваемое, без JS.
 export default function ChapterTOC({ currentSlug }: { currentSlug: string }) {
   return (
     <details
@@ -15,7 +15,7 @@ export default function ChapterTOC({ currentSlug }: { currentSlug: string }) {
       }}
     >
       <summary style={{ cursor: 'pointer', color: 'var(--ink-soft)' }}>
-        Оглавление книги
+        Оглавление руководства
       </summary>
       <ol style={{ margin: '12px 0 4px', paddingLeft: '1.4em' }}>
         {chapters.map((c) =>
@@ -26,7 +26,7 @@ export default function ChapterTOC({ currentSlug }: { currentSlug: string }) {
           ) : (
             <li key={c.slug} style={{ margin: '6px 0' }}>
               <Link
-                href={`/book/${c.slug}`}
+                href={`/guide/${c.slug}`}
                 style={{ color: 'var(--blue)', textDecoration: 'none' }}
               >
                 {c.title}

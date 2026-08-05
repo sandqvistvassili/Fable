@@ -4,7 +4,7 @@ import { chapters } from '@/lib/chapters'
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION } from '@/lib/site'
 
 export const metadata: Metadata = {
-  title: `${SITE_NAME} — книга о похудении без мифов`,
+  title: `${SITE_NAME} — о похудении без мифов`,
   description: SITE_DESCRIPTION,
   alternates: { canonical: SITE_URL },
 }
@@ -56,7 +56,7 @@ export default function Home() {
 
       <div style={{ margin: '40px 0', display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
         <Link
-          href={`/book/${chapters[0].slug}`}
+          href={`/guide/${chapters[0].slug}`}
           style={{
             display: 'inline-block',
             background: 'var(--blue)',
@@ -70,7 +70,7 @@ export default function Home() {
           Читать
         </Link>
         <Link
-          href="/book"
+          href="/guide"
           style={{
             display: 'inline-block',
             background: 'var(--card)',
@@ -86,8 +86,8 @@ export default function Home() {
       </div>
 
       <p style={{ color: 'var(--mute)', fontSize: '15px' }}>
-        13 глав, около 70 минут чтения. Без регистрации: инструменты внутри книги работают
-        прямо в браузере, данные не покидают твоё устройство.
+        13 глав, около 70 минут чтения. Без регистрации: инструменты внутри руководства
+        работают прямо в браузере, данные не покидают твоё устройство.
       </p>
     </main>
   )

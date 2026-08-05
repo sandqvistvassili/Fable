@@ -6,11 +6,11 @@ import { SITE_URL, SITE_NAME } from '@/lib/site'
 export const metadata: Metadata = {
   title: `Оглавление — ${SITE_NAME}`,
   description:
-    'Все 13 глав книги по порядку: от мифов о силе воли и устройства мозга до плана на первые 30 дней, плато и перехода к набору мышц.',
-  alternates: { canonical: `${SITE_URL}/book` },
+    'Все 13 глав руководства по порядку: от мифов о силе воли и устройства мозга до плана на первые 30 дней, плато и перехода к набору мышц.',
+  alternates: { canonical: `${SITE_URL}/guide` },
 }
 
-export default function BookTOC() {
+export default function GuideTOC() {
   return (
     <main className="prose-book" style={{ padding: '48px 20px 80px' }}>
       <p style={{ margin: '0 0 8px' }}>
@@ -23,7 +23,7 @@ export default function BookTOC() {
         {chapters.map((c) => (
           <li key={c.slug} style={{ margin: '0 0 10px' }}>
             <Link
-              href={`/book/${c.slug}`}
+              href={`/guide/${c.slug}`}
               style={{
                 display: 'flex',
                 gap: '16px',
@@ -46,7 +46,7 @@ export default function BookTOC() {
       </ol>
       <p style={{ marginTop: '24px' }}>
         <Link href="/glossary" style={{ color: 'var(--blue)' }}>
-          Карта терминов книги
+          Карта терминов
         </Link>
       </p>
     </main>

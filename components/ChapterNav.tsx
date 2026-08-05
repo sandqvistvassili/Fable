@@ -32,13 +32,13 @@ export default function ChapterNav({ prev, next }: { prev?: Chapter; next?: Chap
       }}
     >
       {prev && (
-        <Link href={`/book/${prev.slug}`} style={linkStyle}>
+        <Link href={`/guide/${prev.slug}`} style={linkStyle}>
           <span style={labelStyle}>← Предыдущая</span>
           {prev.title}
         </Link>
       )}
       {next && (
-        <Link href={`/book/${next.slug}`} style={{ ...linkStyle, textAlign: 'right' }}>
+        <Link href={`/guide/${next.slug}`} style={{ ...linkStyle, textAlign: 'right' }}>
           <span style={labelStyle}>Следующая →</span>
           {next.title}
         </Link>
