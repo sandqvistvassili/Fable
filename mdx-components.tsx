@@ -1,4 +1,5 @@
 import type { MDXComponents } from 'mdx/types'
+import GlossaryTooltip from '@/components/GlossaryTooltip'
 import Proof from '@/components/Proof'
 import Term from '@/components/Term'
 import Calculator from '@/components/Calculator'
@@ -14,6 +15,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         <table {...props} />
       </div>
     ),
+    // Подставляется автоматически remark-плагином глоссария
+    G: GlossaryTooltip,
     Proof,
     Term,
     Calculator,

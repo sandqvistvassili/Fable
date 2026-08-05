@@ -1,6 +1,7 @@
 import createMDX from '@next/mdx'
 import remarkGfm from 'remark-gfm'
 import remarkFrontmatter from 'remark-frontmatter'
+import remarkGlossary from './lib/remark-glossary.mjs'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -12,7 +13,7 @@ const nextConfig = {
 
 const withMDX = createMDX({
   options: {
-    remarkPlugins: [remarkGfm, remarkFrontmatter],
+    remarkPlugins: [remarkGfm, remarkFrontmatter, remarkGlossary],
   },
 })
 
