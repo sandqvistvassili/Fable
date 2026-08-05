@@ -4,6 +4,7 @@ import glossary from '@/content/glossary-index.json'
 import { articles } from '@/lib/blog'
 import { SITE_URL } from '@/lib/site'
 import GlossaryBrowser from '@/components/GlossaryBrowser'
+import SiteHeader from '@/components/SiteHeader'
 
 export const metadata: Metadata = {
   title: 'Словарь терминов о питании, теле и тренировках',
@@ -18,16 +19,13 @@ export default function GlossaryPage() {
   for (const a of articles) articleTitles[a.slug] = a.title
 
   return (
-    <main style={{ padding: '48px 20px 80px', maxWidth: 780, margin: '0 auto' }}>
-      <nav aria-label="Хлебные крошки" style={{ fontSize: '15px', margin: '0 0 20px' }}>
-        <Link href="/guide" style={{ color: 'var(--mute)', textDecoration: 'none' }}>
-          Руководство
-        </Link>
-        <span style={{ color: 'var(--mute)' }}> / </span>
-        <span style={{ color: 'var(--ink-soft)' }}>Словарь</span>
-      </nav>
-
-      <h1 style={{ fontSize: '1.9em', fontWeight: 600, margin: '0 0 12px' }}>Словарь</h1>
+    <>
+    <SiteHeader />
+    <main style={{ padding: '64px 24px 96px', maxWidth: 820, margin: '0 auto' }}>
+      <p className="kicker">Термины руководства и статей</p>
+      <h1 className="display" style={{ fontSize: 'clamp(30px, 4.4vw, 44px)', margin: '0 0 14px' }}>
+        Словарь
+      </h1>
       <p style={{ color: 'var(--ink-soft)', margin: '0 0 24px' }}>
         <span className="num">{glossary.terms.length}</span> терминов из руководства и статей.
         В тексте сложные слова подчёркнуты точками — определение открывается наведением или
@@ -37,5 +35,6 @@ export default function GlossaryPage() {
 
       <GlossaryBrowser articleTitles={articleTitles} />
     </main>
+    </>
   )
 }

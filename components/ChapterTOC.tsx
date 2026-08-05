@@ -1,39 +1,28 @@
 import Link from 'next/link'
 import { chapters } from '@/lib/chapters'
 
-// Краткое оглавление всего руководства в начале главы. Сворачиваемое, без JS.
+/**
+ * Оглавление для узких экранов: свёрнуто по умолчанию, чтобы не съедать
+ * первый экран. На десктопе его заменяет липкая боковая колонка.
+ */
 export default function ChapterTOC({ currentSlug }: { currentSlug: string }) {
   return (
-    <details
-      style={{
-        background: 'var(--paper-2)',
-        border: '1px solid var(--line)',
-        borderRadius: 'var(--radius-sm)',
-        padding: '12px 16px',
-        margin: '0 0 32px',
-        fontSize: '15px',
-      }}
-    >
-      <summary style={{ cursor: 'pointer', color: 'var(--ink-soft)' }}>
-        Оглавление руководства
-      </summary>
-      <ol style={{ margin: '12px 0 4px', paddingLeft: '1.4em' }}>
-        {chapters.map((c) =>
-          c.slug === currentSlug ? (
-            <li key={c.slug} style={{ margin: '6px 0', color: 'var(--ink)' }}>
-              {c.title}
-            </li>
-          ) : (
-            <li key={c.slug} style={{ margin: '6px 0' }}>
-              <Link
-                href={`/guide/${c.slug}`}
-                style={{ color: 'var(--blue)', textDecoration: 'none' }}
-              >
-                {c.title}
-              </Link>
-            </li>
-          ),
-        )}
+    <details className="toc-mobile">
+      <summary>Оглавление · 13 глав</summary>
+      <ol>
+        {chapters.map((c) => (
+          <li key={c.slug}>
+            <Link
+              href={`/guide/${c.slug}`}
+              aria-current={c.slug === currentSlug ? 'page' : undefined}
+            >
+              <span className="num" style={{ fontSize: 11, color: 'var(--text-3)' }}>
+                {String(c.order).padStart(2, '0')}
+              </span>
+              <span>{c.title}</span>
+            </Link>
+          </li>
+        ))}
       </ol>
     </details>
   )

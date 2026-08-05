@@ -1,10 +1,5 @@
 import type { Metadata } from 'next'
-import '@fontsource/literata/400.css'
-import '@fontsource/literata/500.css'
-import '@fontsource/literata/600.css'
-import '@fontsource/literata/400-italic.css'
-import '@fontsource/unbounded/400.css'
-import '@fontsource/unbounded/700.css'
+import '@fontsource-variable/inter'
 import '@fontsource/jetbrains-mono/400.css'
 import '@fontsource/jetbrains-mono/500.css'
 import './globals.css'
@@ -27,6 +22,20 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ru">
+      <head>
+        {/*
+          Настройки чтения применяются до первой отрисовки: иначе текст,
+          набранный крупно, на мгновение показался бы обычным и прыгнул.
+        */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{var s=JSON.parse(localStorage.getItem('guide:reader')||'{}');
+var sc={s:0.94,m:1,l:1.1}[s.size];var w={narrow:620,normal:720,wide:800}[s.width];
+if(sc)document.documentElement.style.setProperty('--reader-scale',sc);
+if(w)document.documentElement.style.setProperty('--measure',w+'px');}catch(e){}`,
+          }}
+        />
+      </head>
       <body>{children}</body>
     </html>
   )

@@ -4,9 +4,11 @@ import type { Metadata } from 'next'
 import { chapters, getChapter, getPrevNext } from '@/lib/chapters'
 import { SITE_URL, SITE_NAME } from '@/lib/site'
 import ReadingProgress from '@/components/ReadingProgress'
+import ChapterSidebar from '@/components/ChapterSidebar'
 import ChapterTOC from '@/components/ChapterTOC'
 import ChapterNav from '@/components/ChapterNav'
 import ChapterArticles from '@/components/ChapterArticles'
+import SiteHeader from '@/components/SiteHeader'
 
 export const dynamicParams = false
 
@@ -56,6 +58,7 @@ export default async function ChapterPage({
       description: chapter.description,
       inLanguage: 'ru',
       position: chapter.order,
+      timeRequired: `PT${chapter.minutes}M`,
       isPartOf: {
         '@type': 'CreativeWorkSeries',
         name: SITE_NAME,
@@ -90,25 +93,35 @@ export default async function ChapterPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <ReadingProgress />
-      <main className="prose-book" style={{ padding: '40px 20px 80px' }}>
-        <nav aria-label="Хлебные крошки" style={{ fontSize: '15px', margin: '0 0 24px' }}>
-          <Link href="/guide" style={{ color: 'var(--mute)', textDecoration: 'none' }}>
-            Руководство
-          </Link>
-          <span style={{ color: 'var(--mute)' }}> / </span>
-          <span style={{ color: 'var(--ink-soft)' }}>{chapter.title}</span>
-        </nav>
+      <SiteHeader reading />
 
-        <ChapterTOC currentSlug={slug} />
+      <div className="reader">
+        <ChapterSidebar currentSlug={slug} />
 
-        <article>
-          <Content />
-        </article>
+        <main style={{ padding: '48px 0 96px', minWidth: 0 }}>
+          <div className="prose-book">
+            <ChapterTOC currentSlug={slug} />
 
-        <ChapterArticles chapterSlug={slug} />
+            <header className="chapter-head">
+              <p className="chapter-eyebrow">
+                <Link href="/guide">Руководство</Link>
+                <span aria-hidden>·</span>
+                <span className="num">Глава {chapter.order}</span>
+                <span aria-hidden>·</span>
+                <span className="num">{chapter.minutes} мин</span>
+              </p>
+            </header>
 
-        <ChapterNav prev={prev} next={next} />
-      </main>
+            <article>
+              <Content />
+            </article>
+
+            <ChapterArticles chapterSlug={slug} />
+
+            <ChapterNav prev={prev} next={next} />
+          </div>
+        </main>
+      </div>
     </>
   )
 }

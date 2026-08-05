@@ -12,6 +12,7 @@ import { SITE_URL, SITE_NAME } from '@/lib/site'
 import ReadingProgress from '@/components/ReadingProgress'
 import GuideCallout from '@/components/GuideCallout'
 import HealthDisclaimer from '@/components/HealthDisclaimer'
+import SiteHeader from '@/components/SiteHeader'
 
 export const dynamicParams = false
 
@@ -100,7 +101,8 @@ export default async function ArticlePage({
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <ReadingProgress />
-      <main className="prose-book" style={{ padding: '40px 20px 80px' }}>
+      <SiteHeader reading />
+      <main className="prose-book" style={{ padding: '56px 24px 96px' }}>
         <nav aria-label="Хлебные крошки" style={{ fontSize: '15px', margin: '0 0 24px' }}>
           <Link href="/blog" style={{ color: 'var(--mute)', textDecoration: 'none' }}>
             Статьи

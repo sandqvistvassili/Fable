@@ -4,6 +4,7 @@ import { articles, categories, articlesByCategory } from '@/lib/blog'
 import { SITE_URL } from '@/lib/site'
 import CategoryNav from '@/components/CategoryNav'
 import ArticleCard from '@/components/ArticleCard'
+import SiteHeader from '@/components/SiteHeader'
 
 export const metadata: Metadata = {
   title: 'Статьи о питании, тренировках и психологии — с источниками',
@@ -14,16 +15,13 @@ export const metadata: Metadata = {
 
 export default function BlogIndex() {
   return (
-    <main style={{ padding: '48px 20px 80px', maxWidth: 980, margin: '0 auto' }}>
-      <nav aria-label="Хлебные крошки" style={{ fontSize: '15px', margin: '0 0 16px' }}>
-        <Link href="/" style={{ color: 'var(--mute)', textDecoration: 'none' }}>
-          Главная
-        </Link>
-        <span style={{ color: 'var(--mute)' }}> / </span>
-        <span style={{ color: 'var(--ink-soft)' }}>Статьи</span>
-      </nav>
-
-      <h1 style={{ fontSize: '1.9em', fontWeight: 600, margin: '0 0 10px' }}>Статьи</h1>
+    <>
+    <SiteHeader />
+    <main style={{ padding: '64px 24px 96px', maxWidth: 1180, margin: '0 auto' }}>
+      <p className="kicker">Разборы по темам</p>
+      <h1 className="display" style={{ fontSize: 'clamp(30px, 4.4vw, 44px)', margin: '0 0 14px' }}>
+        Статьи
+      </h1>
       <p style={{ color: 'var(--ink-soft)', maxWidth: 680, margin: '0 0 28px' }}>
         Разборы отдельных вопросов с механизмом и источниками. Руководство отвечает на вопрос
         «что делать», статьи — на вопрос «почему именно так».{' '}
@@ -80,9 +78,10 @@ export default function BlogIndex() {
         )
       })}
 
-      <p style={{ color: 'var(--mute)', fontSize: '15px' }}>
+      <p style={{ color: 'var(--text-3)', fontSize: '14px' }}>
         Всего статей: <span className="num">{articles.length}</span>
       </p>
     </main>
+    </>
   )
 }
