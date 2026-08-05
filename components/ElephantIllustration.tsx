@@ -35,8 +35,8 @@ export default function ElephantIllustration() {
             margin: 0,
             background: 'var(--card)',
             border: '1px solid var(--line)',
-            borderRadius: 'var(--radius-lg)',
-            padding: '12px',
+            borderRadius: 'var(--radius-sm)',
+            padding: '10px',
           }}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}

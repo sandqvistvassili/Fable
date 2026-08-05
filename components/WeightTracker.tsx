@@ -73,17 +73,7 @@ function weeklyAverages(entries: Entry[]) {
     })
 }
 
-const fieldStyle: React.CSSProperties = {
-  boxSizing: 'border-box',
-  padding: '10px 12px',
-  border: '1px solid var(--line)',
-  borderRadius: 'var(--radius-sm)',
-  background: 'var(--paper)',
-  color: 'var(--ink)',
-  fontSize: '16px',
-  fontFamily: 'var(--font-text)',
-  width: '100%',
-}
+const fieldStyle: React.CSSProperties = {}
 
 export default function WeightTracker() {
   const [mounted, setMounted] = useState(false)
@@ -132,16 +122,16 @@ export default function WeightTracker() {
     <WidgetFrame label="Твой трекер веса">
       {mounted && current && (
         <div style={{ marginBottom: '16px' }}>
-          <span className="num" style={{ fontSize: '34px', fontWeight: 500 }}>
+          <span className="num" style={{ fontSize: '38px', color: 'var(--mint)' }}>
             {current.avg.toFixed(1)}
-            <span style={{ fontSize: '16px', color: 'var(--mute)' }}> кг</span>
+            <span style={{ fontSize: '16px', color: 'var(--panel-mute)' }}> кг</span>
           </span>
-          <span style={{ display: 'block', fontSize: '14px', color: 'var(--ink-soft)' }}>
+          <span style={{ display: 'block', fontSize: '14px', color: 'var(--panel-soft)' }}>
             Недельное среднее
             {delta !== null && (
               <>
                 {' · '}
-                <span className="num" style={{ color: delta <= 0 ? 'var(--done)' : 'var(--ink-soft)' }}>
+                <span className="num" style={{ color: delta <= 0 ? 'var(--mint)' : 'var(--amber)' }}>
                   {delta > 0 ? '+' : ''}
                   {delta.toFixed(1)} кг
                 </span>{' '}
@@ -153,7 +143,7 @@ export default function WeightTracker() {
       )}
 
       {mounted && entries.length === 0 && (
-        <p style={{ margin: '0 0 16px', color: 'var(--ink-soft)' }}>
+        <p className="panel-hint" style={{ margin: '0 0 18px', fontSize: '15px' }}>
           Начни записывать вес здесь, чтобы видеть тренд, а не шум. Данные остаются в твоём
           браузере.
         </p>
@@ -163,12 +153,12 @@ export default function WeightTracker() {
         <WeightChart
           points={points}
           line={line}
-          ariaLabel="График твоих взвешиваний: бледные точки — отдельные дни, синяя линия — недельное среднее"
+          ariaLabel="График твоих взвешиваний: бледные точки — отдельные дни, сплошная линия — недельное среднее"
         />
       )}
 
       {mounted && entries.length > 0 && !current && (
-        <p style={{ margin: '10px 0 16px', fontSize: '14px', color: 'var(--mute)' }}>
+        <p className="panel-hint" style={{ margin: '10px 0 16px' }}>
           Недельное среднее появится после трёх записей за одну календарную неделю. Записей
           на этой неделе: <span className="num">{weeks[weeks.length - 1]?.count ?? 0}</span>.
         </p>
@@ -185,15 +175,11 @@ export default function WeightTracker() {
         }}
       >
         <label style={{ display: 'block' }}>
-          <span style={{ display: 'block', fontSize: '14px', color: 'var(--ink-soft)', marginBottom: '6px' }}>
-            Дата
-          </span>
+          <span>Дата</span>
           <input type="date" value={date} onChange={(e) => setDate(e.target.value)} style={fieldStyle} required />
         </label>
         <label style={{ display: 'block' }}>
-          <span style={{ display: 'block', fontSize: '14px', color: 'var(--ink-soft)', marginBottom: '6px' }}>
-            Вес, кг
-          </span>
+          <span>Вес, кг</span>
           <input
             type="number"
             inputMode="decimal"
@@ -206,26 +192,14 @@ export default function WeightTracker() {
             required
           />
         </label>
-        <button
-          type="submit"
-          style={{
-            padding: '11px 20px',
-            background: 'var(--blue)',
-            color: '#fff',
-            border: 'none',
-            borderRadius: 'var(--radius-sm)',
-            fontSize: '16px',
-            fontFamily: 'var(--font-text)',
-            cursor: 'pointer',
-          }}
-        >
+        <button type="submit" className="panel-btn">
           Записать
         </button>
       </form>
 
       {mounted && entries.length > 0 && (
         <details style={{ marginTop: '16px', fontSize: '15px' }}>
-          <summary style={{ cursor: 'pointer', color: 'var(--ink-soft)' }}>
+          <summary style={{ cursor: 'pointer', color: 'var(--panel-soft)' }}>
             Все записи ({entries.length})
           </summary>
           <ul style={{ listStyle: 'none', margin: '10px 0 0', padding: 0 }}>
@@ -238,10 +212,10 @@ export default function WeightTracker() {
                   alignItems: 'center',
                   gap: '12px',
                   padding: '6px 0',
-                  borderBottom: '1px solid var(--line)',
+                  borderBottom: '1px solid var(--panel-line)',
                 }}
               >
-                <span className="num" style={{ color: 'var(--ink-soft)' }}>{e.date}</span>
+                <span className="num" style={{ color: 'var(--panel-soft)' }}>{e.date}</span>
                 <span className="num">{e.weight.toFixed(1)} кг</span>
                 <button
                   type="button"
@@ -250,7 +224,7 @@ export default function WeightTracker() {
                   style={{
                     background: 'none',
                     border: 'none',
-                    color: 'var(--mute)',
+                    color: 'var(--panel-mute)',
                     cursor: 'pointer',
                     fontSize: '15px',
                     padding: '2px 6px',

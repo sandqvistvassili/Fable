@@ -29,8 +29,8 @@ export default function ReadingProgress() {
         top: 0,
         left: 0,
         right: 0,
-        height: 3,
-        background: 'var(--paper-2)',
+        height: 2,
+        background: 'transparent',
         zIndex: 50,
       }}
     >

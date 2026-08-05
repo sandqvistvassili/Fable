@@ -1,5 +1,6 @@
-// Общая рамка для встроенных в текст инструментов: карточка на всю ширину
-// колонки, отступы сверху и снизу, чтобы инструмент читался как часть главы.
+// Инструменты внутри текста оформлены тёмной панелью: читатель видит,
+// что перешёл от чтения к работе с прибором, и так же видит, где вернулся
+// обратно к тексту. Этот контраст — основа всего оформления.
 export default function WidgetFrame({
   label,
   children,
@@ -10,25 +11,10 @@ export default function WidgetFrame({
   return (
     <section
       aria-label={label}
-      style={{
-        background: 'var(--card)',
-        border: '1px solid var(--line)',
-        borderRadius: 'var(--radius-lg)',
-        padding: '20px',
-        margin: '28px 0',
-      }}
+      className="panel"
+      style={{ margin: '32px 0', padding: '24px' }}
     >
-      <p
-        style={{
-          margin: '0 0 14px',
-          fontSize: '13px',
-          letterSpacing: '0.04em',
-          textTransform: 'uppercase',
-          color: 'var(--mute)',
-        }}
-      >
-        {label}
-      </p>
+      <p className="panel-label">{label}</p>
       {children}
     </section>
   )

@@ -56,29 +56,13 @@ function compute(f: FormState): Result | null {
   }
 }
 
-const fieldStyle: React.CSSProperties = {
-  width: '100%',
-  boxSizing: 'border-box',
-  padding: '10px 12px',
-  border: '1px solid var(--line)',
-  borderRadius: 'var(--radius-sm)',
-  background: 'var(--paper)',
-  color: 'var(--ink)',
-  fontSize: '16px',
-  fontFamily: 'var(--font-text)',
-}
-
-const labelStyle: React.CSSProperties = {
-  display: 'block',
-  fontSize: '14px',
-  color: 'var(--ink-soft)',
-  marginBottom: '6px',
-}
+// Оформление полей и кнопок живёт в классах .panel* в globals.css
+const fieldStyle: React.CSSProperties = {}
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <label style={{ display: 'block' }}>
-      <span style={labelStyle}>{label}</span>
+      <span>{label}</span>
       {children}
     </label>
   )
@@ -194,20 +178,7 @@ export default function Calculator() {
             </select>
           </Field>
         </div>
-        <button
-          type="submit"
-          style={{
-            marginTop: '16px',
-            padding: '11px 24px',
-            background: 'var(--blue)',
-            color: '#fff',
-            border: 'none',
-            borderRadius: 'var(--radius-sm)',
-            fontSize: '16px',
-            fontFamily: 'var(--font-text)',
-            cursor: 'pointer',
-          }}
-        >
+        <button type="submit" className="panel-btn" style={{ marginTop: '18px' }}>
           Посчитать
         </button>
       </form>
@@ -226,28 +197,18 @@ export default function Calculator() {
             { value: result.budget, unit: 'ккал', label: 'Бюджет с дефицитом' },
             { value: result.protein, unit: 'г', label: 'Белок в день' },
           ].map((card) => (
-            <div
-              key={card.label}
-              style={{
-                background: 'var(--paper)',
-                border: '1px solid var(--line)',
-                borderRadius: 'var(--radius-sm)',
-                padding: '14px 16px',
-              }}
-            >
-              <span className="num" style={{ display: 'block', fontSize: '26px', fontWeight: 500 }}>
+            <div key={card.label} className="panel-stat">
+              <span className="v">
                 {card.value}
-                <span style={{ fontSize: '15px', color: 'var(--mute)' }}> {card.unit}</span>
+                <small> {card.unit}</small>
               </span>
-              <span style={{ display: 'block', fontSize: '14px', color: 'var(--ink-soft)', marginTop: '2px' }}>
-                {card.label}
-              </span>
+              <span className="l">{card.label}</span>
             </div>
           ))}
         </div>
       )}
 
-      <p style={{ margin: '14px 0 0', fontSize: '13px', color: 'var(--mute)' }}>
+      <p className="panel-hint" style={{ margin: '16px 0 0' }}>
         Результат сохраняется в этом браузере и никуда не отправляется.
       </p>
     </WidgetFrame>

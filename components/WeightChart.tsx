@@ -50,7 +50,7 @@ export default function WeightChart({
             x2={W - PAD.right}
             y1={y(v)}
             y2={y(v)}
-            stroke="var(--line)"
+            stroke="var(--panel-line)"
             strokeWidth={1}
           />
           <text
@@ -58,7 +58,7 @@ export default function WeightChart({
             y={y(v) + 4}
             textAnchor="end"
             fontSize={11}
-            fill="var(--mute)"
+            fill="var(--panel-mute)"
             fontFamily="var(--font-mono)"
           >
             {v.toFixed(1)}
@@ -66,13 +66,13 @@ export default function WeightChart({
         </g>
       ))}
       {points.map((p, i) => (
-        <circle key={i} cx={x(p.t)} cy={y(p.w)} r={3.5} fill="var(--mute)" opacity={0.45} />
+        <circle key={i} cx={x(p.t)} cy={y(p.w)} r={3.5} fill="var(--panel-soft)" opacity={0.4} />
       ))}
       {line.length > 1 && (
-        <path d={path} fill="none" stroke="var(--blue)" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round" />
+        <path d={path} fill="none" stroke="var(--mint)" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round" />
       )}
       {line.map((p, i) => (
-        <circle key={`a${i}`} cx={x(p.t)} cy={y(p.w)} r={4} fill="var(--blue)" />
+        <circle key={`a${i}`} cx={x(p.t)} cy={y(p.w)} r={4} fill="var(--mint)" />
       ))}
     </svg>
   )

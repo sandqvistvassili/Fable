@@ -1,17 +1,42 @@
 @import 'tailwindcss';
 
-:root {
-  --ink: #16242c;
-  --ink-soft: #3d5561;
-  --mute: #7b8f98;
-  --paper: #eef1f0;
-  --paper-2: #e3e8e7;
-  --card: #ffffff;
-  --line: #d2dad9;
-  --blue: #3f6076;
-  --done: #2f6b4f;
+/*
+  Дизайн строится на контрасте двух сред.
 
-  --font-text: 'Golos Text', system-ui, -apple-system, sans-serif;
+  Светлая — для чтения: тёплая бумага, Literata, спокойный ритм.
+  Тёмная — для инструментов: калькуляторы, графики и трекеры выглядят
+  как приборы, а не как продолжение текста. Переключение между ними
+  и есть главный визуальный приём: читаешь книгу — работаешь с прибором.
+*/
+
+:root {
+  /* Светлая среда — чтение */
+  --paper: #f4f1ea;
+  --paper-2: #eae5da;
+  --card: #ffffff;
+  --ink: #1c1a16;
+  --ink-soft: #4a4740;
+  --mute: #8a8477;
+  --line: #d8d2c4;
+
+  /* Акценты. Имена сохранены с прежней системы, чтобы компоненты
+     не переписывались: --blue отвечает за основной акцент,
+     --done — за спокойный второй. */
+  --blue: #b0472b;
+  --done: #4e6a52;
+
+  /* Тёмная среда — инструменты */
+  --panel: #141c24;
+  --panel-2: #1b2530;
+  --panel-ink: #e8eef2;
+  --panel-soft: #9fb0bc;
+  --panel-mute: #65798a;
+  --panel-line: #243140;
+  --mint: #5ee0c0;
+  --amber: #f2b45c;
+
+  --font-display: 'Unbounded', system-ui, sans-serif;
+  --font-text: 'Literata', Georgia, serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 
   --radius: 12px;
@@ -42,13 +67,13 @@ html {
 
 body {
   margin: 0;
-  font-size: 17px;
-  line-height: 1.7;
+  font-size: 17.5px;
+  line-height: 1.72;
 }
 
 @media (min-width: 640px) {
   body {
-    font-size: 18px;
+    font-size: 18.5px;
   }
 }
 
@@ -57,38 +82,65 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
-/* Колонка чтения */
+/* Надзаголовок: мелкие прописные с разрядкой — вместо них раньше
+   был обычный серый текст, из-за чего страницы читались одинаково */
+.kicker {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin: 0 0 24px;
+}
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+/* ─────────────────────────── колонка чтения ─────────────────────────── */
+
 .prose-book {
   max-width: 680px;
   margin-inline: auto;
 }
 
 .prose-book h1 {
-  font-size: 1.9em;
-  line-height: 1.25;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  margin: 0 0 0.9em;
+  font-family: var(--font-display);
+  font-size: clamp(30px, 6vw, 42px);
+  line-height: 1.08;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.8em;
 }
 
 .prose-book h2 {
-  font-size: 1.35em;
+  font-family: var(--font-display);
+  font-size: 1.05em;
   line-height: 1.35;
-  font-weight: 600;
-  margin: 2em 0 0.7em;
+  font-weight: 700;
+  letter-spacing: -0.005em;
+  margin: 2.4em 0 0.8em;
+}
+
+.prose-book h3 {
+  font-family: var(--font-display);
+  font-size: 0.95em;
+  font-weight: 700;
+  margin: 1.8em 0 0.6em;
 }
 
 .prose-book p {
-  margin: 0 0 1.1em;
+  margin: 0 0 1.05em;
 }
 
 .prose-book em {
   color: var(--ink-soft);
 }
 
-/* Tailwind Preflight снимает маркеры со списков — возвращаем их
-   внутри колонки чтения, иначе перечисления и нумерованные
-   источники читаются как обычные абзацы */
 .prose-book ul,
 .prose-book ol {
   margin: 0 0 1.1em;
@@ -104,7 +156,7 @@ body {
 }
 
 .prose-book li::marker {
-  color: var(--mute);
+  color: var(--blue);
 }
 
 .prose-book li {
@@ -114,14 +166,14 @@ body {
 .prose-book table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.88em;
+  font-size: 0.86em;
   line-height: 1.5;
   margin: 1.4em 0;
 }
 
 .prose-book .table-wrap {
   overflow-x: auto;
-  margin: 1.4em 0;
+  margin: 1.6em 0;
   border: 1px solid var(--line);
   border-radius: var(--radius-sm);
   background: var(--card);
@@ -135,13 +187,15 @@ body {
 .prose-book th,
 .prose-book td {
   text-align: left;
-  padding: 10px 14px;
+  padding: 11px 15px;
   border-bottom: 1px solid var(--line);
   vertical-align: top;
 }
 
 .prose-book th {
-  font-weight: 600;
+  font-family: var(--font-display);
+  font-size: 0.85em;
+  font-weight: 700;
   color: var(--ink-soft);
   background: var(--paper-2);
 }
@@ -150,16 +204,16 @@ body {
   border-bottom: none;
 }
 
-/* Врезка с исследованием — в статьях оформлена цитатой */
+/* Врезка с исследованием */
 .prose-book blockquote {
-  margin: 1.5em 0;
-  padding: 14px 18px;
+  margin: 1.6em 0;
+  padding: 16px 20px;
   background: var(--card);
   border: 1px solid var(--line);
   border-left: 3px solid var(--blue);
   border-radius: var(--radius-sm);
-  font-size: 0.94em;
-  line-height: 1.6;
+  font-size: 0.92em;
+  line-height: 1.62;
   color: var(--ink-soft);
 }
 
@@ -174,16 +228,19 @@ body {
 .prose-book hr {
   border: none;
   border-top: 1px solid var(--line);
-  margin: 2em 0;
+  margin: 2.4em 0;
 }
 
 .prose-book a {
   color: var(--blue);
   text-decoration: underline;
   text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
 }
 
-/* Термин глоссария: пунктирное подчёркивание цветом --done */
+/* ─────────────────────── три вида подчёркиваний ──────────────────────── */
+
+/* Термин книги — пунктир цветом --done */
 .term-trigger {
   cursor: pointer;
   background: none;
@@ -191,7 +248,7 @@ body {
   padding: 0;
   font: inherit;
   color: inherit;
-  text-decoration: underline dotted var(--done);
+  text-decoration: underline dashed var(--done);
   text-decoration-thickness: 1.5px;
   text-underline-offset: 3px;
 }
@@ -200,8 +257,7 @@ body {
   color: var(--done);
 }
 
-/* Термин глоссария: точечное подчёркивание, чтобы отличалось и от
-   Term (пунктир цветом --done), и от Proof (сплошная цветом --blue) */
+/* Термин словаря — точки приглушённым */
 .glossary-trigger {
   cursor: help;
   background: none;
@@ -221,45 +277,7 @@ body {
   text-decoration-color: var(--ink-soft);
 }
 
-.glossary-popup {
-  position: absolute;
-  z-index: 40;
-  left: 0;
-  top: calc(100% + 8px);
-  display: block;
-  width: max-content;
-  max-width: min(320px, calc(100vw - 40px));
-  padding: 12px 14px;
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-sm);
-  box-shadow: 0 6px 20px rgb(22 36 44 / 0.1);
-  font-size: 14px;
-  line-height: 1.55;
-  text-align: left;
-  white-space: normal;
-}
-
-.glossary-popup-name {
-  display: block;
-  font-weight: 600;
-  color: var(--ink);
-  margin-bottom: 4px;
-}
-
-.glossary-popup-en {
-  font-weight: 400;
-  color: var(--mute);
-  font-family: var(--font-mono);
-  font-size: 12px;
-}
-
-.glossary-popup-def {
-  display: block;
-  color: var(--ink-soft);
-}
-
-/* Фраза с источником: сплошное подчёркивание цветом --blue */
+/* Фраза с источником — сплошная акцентом */
 .proof-trigger {
   cursor: pointer;
   background: none;
@@ -276,7 +294,186 @@ body {
   color: var(--blue);
 }
 
-/* Скрыто визуально, доступно скринридеру */
+/* Всплывающее определение */
+.glossary-popup {
+  position: absolute;
+  z-index: 40;
+  left: 0;
+  top: calc(100% + 8px);
+  display: block;
+  width: max-content;
+  max-width: min(320px, calc(100vw - 40px));
+  padding: 14px 16px;
+  background: var(--panel);
+  border: 1px solid var(--panel-line);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 10px 30px rgb(12 17 22 / 0.28);
+  font-size: 14px;
+  line-height: 1.55;
+  text-align: left;
+  white-space: normal;
+  color: var(--panel-soft);
+}
+
+.glossary-popup-name {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--panel-ink);
+  margin-bottom: 5px;
+}
+
+.glossary-popup-en {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  color: var(--mint);
+  font-size: 12px;
+}
+
+.glossary-popup-def {
+  display: block;
+}
+
+/* ────────────────────────── тёмная панель ────────────────────────────── */
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--panel-line);
+  border-radius: var(--radius-lg);
+  color: var(--panel-ink);
+  padding: 22px;
+}
+
+.panel-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--panel-mute);
+  margin: 0 0 16px;
+}
+
+.panel-hint {
+  font-size: 13px;
+  color: var(--panel-mute);
+  line-height: 1.55;
+}
+
+.panel input,
+.panel select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 11px 13px;
+  background: var(--panel-2);
+  border: 1px solid var(--panel-line);
+  border-radius: var(--radius-sm);
+  color: var(--panel-ink);
+  font-size: 16px;
+  font-family: var(--font-text);
+}
+
+.panel input:focus,
+.panel select:focus {
+  outline: 2px solid var(--mint);
+  outline-offset: 1px;
+}
+
+.panel label > span {
+  display: block;
+  font-size: 13px;
+  color: var(--panel-soft);
+  margin-bottom: 6px;
+}
+
+.panel-btn {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  background: var(--mint);
+  color: #08221c;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 13px 26px;
+  cursor: pointer;
+}
+
+.panel-btn:hover {
+  filter: brightness(1.08);
+}
+
+.panel-stat {
+  background: var(--panel-2);
+  border: 1px solid var(--panel-line);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+}
+
+.panel-stat .v {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 26px;
+  line-height: 1.1;
+  color: var(--mint);
+}
+
+.panel-stat .v small {
+  font-size: 14px;
+  color: var(--panel-mute);
+}
+
+.panel-stat .l {
+  display: block;
+  font-size: 13px;
+  color: var(--panel-soft);
+  margin-top: 4px;
+}
+
+/* ───────────────────────────── интерфейс ─────────────────────────────── */
+
+.btn {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 15px 30px;
+  border-radius: 3px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: var(--blue);
+}
+
+.btn-ghost {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  padding: 14px 26px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  text-decoration: none;
+  background: var(--card);
+}
+
+.btn-ghost:hover {
+  border-color: var(--ink);
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 16px 18px;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;

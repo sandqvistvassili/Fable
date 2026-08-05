@@ -36,20 +36,20 @@ export default function WeightTrendDemo() {
         style={{
           margin: '14px 0 0',
           fontSize: '14px',
-          color: 'var(--mute)',
+          color: 'var(--panel-mute)',
           display: 'flex',
           flexWrap: 'wrap',
           gap: '4px 18px',
         }}
       >
         <span>
-          <span style={{ color: 'var(--mute)' }}>●</span> отдельные дни
+          <span style={{ color: 'var(--panel-soft)' }}>●</span> отдельные дни
         </span>
         <span>
-          <span style={{ color: 'var(--blue)' }}>—</span> недельное среднее
+          <span style={{ color: 'var(--mint)' }}>—</span> недельное среднее
         </span>
       </p>
-      <p style={{ margin: '10px 0 0', fontSize: '15px', color: 'var(--ink-soft)' }}>
+      <p className="panel-hint" style={{ margin: '10px 0 0', fontSize: '15px' }}>
         Так же будет выглядеть и твой график, когда начнёшь записывать свой вес ниже.
       </p>
     </WidgetFrame>
