@@ -1,0 +1,182 @@
+@import 'tailwindcss';
+
+:root {
+  --ink: #16242c;
+  --ink-soft: #3d5561;
+  --mute: #7b8f98;
+  --paper: #eef1f0;
+  --paper-2: #e3e8e7;
+  --card: #ffffff;
+  --line: #d2dad9;
+  --blue: #3f6076;
+  --done: #2f6b4f;
+
+  --font-text: 'Golos Text', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  --radius: 12px;
+  --radius-sm: 10px;
+  --radius-lg: 14px;
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-mute: var(--mute);
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-card: var(--card);
+  --color-line: var(--line);
+  --color-blue: var(--blue);
+  --color-done: var(--done);
+  --font-sans: var(--font-text);
+  --font-mono: var(--font-mono);
+}
+
+html {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-text);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+@media (min-width: 640px) {
+  body {
+    font-size: 18px;
+  }
+}
+
+.num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Колонка чтения */
+.prose-book {
+  max-width: 680px;
+  margin-inline: auto;
+}
+
+.prose-book h1 {
+  font-size: 1.9em;
+  line-height: 1.25;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.9em;
+}
+
+.prose-book h2 {
+  font-size: 1.35em;
+  line-height: 1.35;
+  font-weight: 600;
+  margin: 2em 0 0.7em;
+}
+
+.prose-book p {
+  margin: 0 0 1.1em;
+}
+
+.prose-book em {
+  color: var(--ink-soft);
+}
+
+.prose-book ul,
+.prose-book ol {
+  margin: 0 0 1.1em;
+  padding-left: 1.4em;
+}
+
+.prose-book li {
+  margin-bottom: 0.4em;
+}
+
+.prose-book table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88em;
+  line-height: 1.5;
+  margin: 1.4em 0;
+}
+
+.prose-book .table-wrap {
+  overflow-x: auto;
+  margin: 1.4em 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--card);
+}
+
+.prose-book .table-wrap table {
+  margin: 0;
+  min-width: 560px;
+}
+
+.prose-book th,
+.prose-book td {
+  text-align: left;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+
+.prose-book th {
+  font-weight: 600;
+  color: var(--ink-soft);
+  background: var(--paper-2);
+}
+
+.prose-book tr:last-child td {
+  border-bottom: none;
+}
+
+.prose-book hr {
+  border: none;
+  border-top: 1px solid var(--line);
+  margin: 2em 0;
+}
+
+.prose-book a {
+  color: var(--blue);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Термин глоссария: пунктирное подчёркивание цветом --done */
+.term-trigger {
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  text-decoration: underline dotted var(--done);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+}
+
+.term-trigger:hover {
+  color: var(--done);
+}
+
+/* Фраза с источником: сплошное подчёркивание цветом --blue */
+.proof-trigger {
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  text-decoration: underline solid var(--blue);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+}
+
+.proof-trigger:hover {
+  color: var(--blue);
+}
