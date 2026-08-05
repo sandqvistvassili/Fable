@@ -5,6 +5,7 @@ import Term from '@/components/Term'
 import Calculator from '@/components/Calculator'
 import WeightTrendDemo from '@/components/WeightTrendDemo'
 import WeightTracker from '@/components/WeightTracker'
+import PlateauDiagnostic from '@/components/PlateauDiagnostic'
 import ElephantIllustration from '@/components/ElephantIllustration'
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
@@ -22,6 +23,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     Calculator,
     WeightTrendDemo,
     WeightTracker,
+    PlateauDiagnostic,
     ElephantIllustration,
     ...components,
   }
