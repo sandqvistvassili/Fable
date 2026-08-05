@@ -46,8 +46,48 @@ export default async function ChapterPage({
   const { default: Content } = await import(`@/content/chapters/${chapter.file}.mdx`)
   const { prev, next } = getPrevNext(slug)
 
+  const jsonLd = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: chapter.title,
+      alternativeHeadline: chapter.seoTitle,
+      description: chapter.description,
+      inLanguage: 'ru',
+      position: chapter.order,
+      isPartOf: {
+        '@type': 'Book',
+        name: 'Руководство, которого у тебя никогда не было',
+        url: SITE_URL,
+      },
+      mainEntityOfPage: `${SITE_URL}/book/${chapter.slug}`,
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Книга',
+          item: `${SITE_URL}/book`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: chapter.title,
+          item: `${SITE_URL}/book/${chapter.slug}`,
+        },
+      ],
+    },
+  ]
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <ReadingProgress />
       <main className="prose-book" style={{ padding: '40px 20px 80px' }}>
         <nav aria-label="Хлебные крошки" style={{ fontSize: '15px', margin: '0 0 24px' }}>

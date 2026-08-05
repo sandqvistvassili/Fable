@@ -1,4 +1,6 @@
 import type { MDXComponents } from 'mdx/types'
+import Proof from '@/components/Proof'
+import Term from '@/components/Term'
 import Calculator from '@/components/Calculator'
 import WeightTrendDemo from '@/components/WeightTrendDemo'
 import WeightTracker from '@/components/WeightTracker'
@@ -12,6 +14,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         <table {...props} />
       </div>
     ),
+    Proof,
+    Term,
     Calculator,
     WeightTrendDemo,
     WeightTracker,
