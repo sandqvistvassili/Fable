@@ -3508,7 +3508,7 @@
         "vsadnik-i-slon-pochemu-ya-sryvayus": 1,
         "mokraya-gubka-pochemu-ves-vret": 1
       },
-      "words": 604,
+      "words": 618,
       "refs": 2,
       "canonicalSlug": null,
       "duplicateGroup": null,
@@ -5133,42 +5133,41 @@
       "category": "psihologiya",
       "chapter": "chetyre-lzhi-pochemu-ne-poluchaetsya-pohudet",
       "chapterScores": {
-        "chetyre-lzhi-pochemu-ne-poluchaetsya-pohudet": 25,
+        "chetyre-lzhi-pochemu-ne-poluchaetsya-pohudet": 27,
         "odin-skuchnyj-den-kak-ne-brosit": 1
       },
-      "words": 539,
-      "refs": 6,
+      "words": 579,
+      "refs": 7,
       "canonicalSlug": "willpower-how-to-develop-willpower",
       "duplicateGroup": [
         "discipline-vs-willpower",
         "willpower-how-to-develop-willpower"
       ],
       "status": "core",
-      "onTopicHits": 7,
+      "onTopicHits": 9,
       "offTopicHits": 0
     },
     {
       "slug": "discipline-vs-willpower",
       "title": "Сила воли — плохая стратегия: нейронаука в пользу дисциплины, а не мотивации",
-      "description": "Сила воли истощается. Дисциплина силы воли не требует. Вот точное нейрологическое различие и как выстроить поведенческую архитектуру, которая не зависит от того, хочется вам или нет.",
-      "sourceCategory": "Общее",
-      "category": "trenirovki",
+      "description": "Сила воли — ненадёжная опора. Дисциплина её не требует. Вот в чём разница и как выстроить поведенческую архитектуру, которая не зависит от того, хочется вам или нет.",
+      "sourceCategory": "Психология",
+      "category": "psihologiya",
       "chapter": "chetyre-lzhi-pochemu-ne-poluchaetsya-pohudet",
       "chapterScores": {
-        "chetyre-lzhi-pochemu-ne-poluchaetsya-pohudet": 48,
-        "vsadnik-i-slon-pochemu-ya-sryvayus": 2,
+        "chetyre-lzhi-pochemu-ne-poluchaetsya-pohudet": 40,
         "odin-skuchnyj-den-kak-ne-brosit": 1,
         "ves-vstal-chto-delat-pri-plato": 1
       },
-      "words": 595,
-      "refs": 2,
+      "words": 613,
+      "refs": 3,
       "canonicalSlug": "willpower-how-to-develop-willpower",
       "duplicateGroup": [
         "discipline-vs-willpower",
         "willpower-how-to-develop-willpower"
       ],
       "status": "core",
-      "onTopicHits": 20,
+      "onTopicHits": 19,
       "offTopicHits": 0
     },
     {
