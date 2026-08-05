@@ -7,6 +7,7 @@ import WeightTrendDemo from '@/components/WeightTrendDemo'
 import WeightTracker from '@/components/WeightTracker'
 import PlateauDiagnostic from '@/components/PlateauDiagnostic'
 import DailyWin from '@/components/DailyWin'
+import DaySchedule from '@/components/DaySchedule'
 import ElephantIllustration from '@/components/ElephantIllustration'
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
@@ -26,6 +27,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     WeightTracker,
     PlateauDiagnostic,
     DailyWin,
+    DaySchedule,
     ElephantIllustration,
     ...components,
   }
