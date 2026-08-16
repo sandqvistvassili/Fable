@@ -35,7 +35,11 @@ const EMPTY: FormState = {
   activity: '1.375',
 }
 
-type Result = { tdee: number; budget: number; protein: number }
+type Result = { tdee: number; budget: number; protein: number; floored: boolean }
+
+// Безопасный минимум калорийности: ниже него дефицит не считается корректным
+// расчётом, а становится тем самым экстремальным урезанием из главы 1.
+const SAFE_FLOOR = { male: 1500, female: 1200 } as const
 
 function compute(f: FormState): Result | null {
   const age = Number(f.age)
@@ -49,10 +53,20 @@ function compute(f: FormState): Result | null {
   const bmr =
     10 * weight + 6.25 * height - 5 * age + (f.sex === 'male' ? 5 : -161)
   const tdee = bmr * Number(f.activity)
+
+  // 15–20% дефицита, как в тексте главы: середина диапазона, но не меньше
+  // 300 и не больше 500 ккал — так же, как описано словами.
+  const deficit = Math.min(500, Math.max(300, tdee * 0.175))
+  const floor = SAFE_FLOOR[f.sex]
+  const rawBudget = tdee - deficit
+  const floored = rawBudget < floor
+  const budget = floored ? floor : rawBudget
+
   return {
     tdee: Math.round(tdee),
-    budget: Math.round(tdee - 400),
+    budget: Math.round(budget),
     protein: Math.round(target * 1.8),
+    floored,
   }
 }
 
@@ -206,6 +220,14 @@ export default function Calculator() {
             </div>
           ))}
         </div>
+      )}
+
+      {result?.floored && (
+        <p className="panel-hint" style={{ margin: '16px 0 0', color: 'var(--accent, #b45309)' }}>
+          Расчётный дефицит увёл бюджет ниже безопасного минимума, поэтому здесь
+          показана нижняя граница, а не честный дефицит 15–20%. При таком расходе
+          снижение веса стоит обсуждать с врачом — см. главу «Прежде чем начать».
+        </p>
       )}
 
       <p className="panel-hint" style={{ margin: '16px 0 0' }}>
