@@ -125,3 +125,7 @@ _[На этапе дизайна: заменить на статичную сх�
 * Dhurandhar, N.V. et al. (2015). Energy balance measurement: when something is not better than nothing. International Journal of Obesity, 39(7), 1109–1113. DOI: 10.1038/ijo.2014.199
 
 * Spiegel, K., Tasali, E., Penev, P., & Van Cauter, E. (2004). Brief communication: sleep curtailment in healthy young men is associated with decreased leptin levels, elevated ghrelin levels, and increased hunger and appetite. Annals of Internal Medicine, 141(11), 846–850. DOI: 10.7326/0003-4819-141-11-200412070-00008
+
+* Tasali, E., Wroblewski, K., Kahn, E., Kilkus, J., & Schoeller, D.A. (2022). Effect of sleep extension on objectively assessed energy intake among adults with overweight in real-life settings. JAMA Internal Medicine, 182(4), 365–374. DOI: 10.1001/jamainternmed.2021.8098
+
+* Aubin, H.-J., Farley, A., Lycett, D., Lahmek, P., & Aveyard, P. (2012). Weight gain in smokers after quitting cigarettes: meta-analysis. BMJ, 345, e4439. DOI: 10.1136/bmj.e4439

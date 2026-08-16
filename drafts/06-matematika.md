@@ -74,4 +74,6 @@
 
 * Ludwig, D.S., & Ebbeling, C.B. (2018). The carbohydrate-insulin model of obesity: beyond «calories in, calories out». JAMA Internal Medicine, 178(8), 1098–1103. DOI: 10.1001/jamainternmed.2018.2933
 
+* Morton, R.W. et al. (2018). A systematic review, meta-analysis and meta-regression of the effect of protein supplementation on resistance training-induced gains in muscle mass and strength. British Journal of Sports Medicine, 52(6), 376–384. DOI: 10.1136/bjsports-2017-097608
+
 Примечание: роль инсулина в наборе веса — предмет незакрытого научного спора. Работа Людвига и Эббелинг излагает углеводно-инсулиновую модель, работы Холла — возражения против неё. Общее в обеих позициях то, на чём построена эта глава: без дефицита энергии вес не уходит.
