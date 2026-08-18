@@ -1,0 +1,56 @@
+{
+  "siteUrl": "https://vassilisandqvist.com",
+  "startDate": "2026-08-11",
+  "locale": "en",
+  "author": {
+    "name": "Vassili Sandqvist",
+    "tagline": "Learning to code in public, one day at a time.",
+    "bio": "Career changer learning Python, studying Swedish, writing every day in English.",
+    "languages": ["English", "Russian", "Swedish"],
+    "social": {
+      "github": "https://github.com/vassilisandqvist",
+      "linkedin": "https://www.linkedin.com/in/vassilisandqvist/",
+      "x": "https://x.com/vassilisandqvist"
+    }
+  },
+  "site": {
+    "title": "Vassili Sandqvist — learning in public",
+    "description": "A daily journal of learning to code. One short entry every day: what I studied, what confused me, and what finally made sense."
+  },
+  "topics": {
+    "python": {
+      "label": "Python",
+      "blurb": "Learning to program, one confusion at a time.",
+      "primary": true
+    },
+    "swedish": {
+      "label": "Swedish",
+      "blurb": "Studying Swedish for admission to Yrkeshögskola.",
+      "primary": true
+    },
+    "english": {
+      "label": "English",
+      "blurb": "Notes on the language I write this journal in.",
+      "primary": true
+    },
+    "security": {
+      "label": "Security",
+      "blurb": "Where I am heading after the first developer job.",
+      "primary": false
+    },
+    "life": {
+      "label": "Life",
+      "blurb": "Everything else worth writing down.",
+      "primary": false
+    }
+  },
+  "limits": {
+    "titleMax": 60,
+    "summaryMax": 160,
+    "hubIndexThreshold": 5,
+    "pageSize": 40,
+    "linkedinLimit": 3000,
+    "linkedinWarn": 2800,
+    "xLimit": 280
+  }
+}

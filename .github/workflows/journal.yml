@@ -1,0 +1,51 @@
+name: journal
+
+on:
+  push:
+    paths:
+      - 'journal/**'
+      - '.github/workflows/journal.yml'
+  pull_request:
+    paths:
+      - 'journal/**'
+
+defaults:
+  run:
+    working-directory: journal
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: journal/package-lock.json
+
+      - name: Install
+        run: npm ci
+
+      - name: Validate content
+        run: node scripts/validate.mjs
+
+      - name: Build index
+        run: node scripts/build-index.mjs
+
+      - name: Unit tests
+        run: npx vitest run
+
+      - name: Typecheck
+        run: npx tsc --noEmit
+
+      - name: Production build
+        run: npx next build && node scripts/build-og.mjs
+
+      - name: Upload site
+        uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: journal/out
+          retention-days: 7

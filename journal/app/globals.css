@@ -1,0 +1,288 @@
+@import 'tailwindcss';
+
+/* ---------------------------------------------------------------- tokens --
+   "The Ledger": a logbook, not a blog. Monospace carries everything the
+   machine knows (day numbers, dates, topics, counters); the serif carries
+   everything the human wrote. One accent — the iron red of a ledger rule and
+   a correction pen — and nothing else competes with it.
+-------------------------------------------------------------------------- */
+
+:root {
+  --ground: #edeee9;
+  --surface: #f8f9f5;
+  --sunk: #e4e6df;
+  --ink: #1b1d1a;
+  --ink-mid: #4c514a;
+  --ink-soft: #767c73;
+  --rule: #d2d5cb;
+  --rule-strong: #b9bdb2;
+  --accent: #9b382c;
+  --accent-quiet: #c4695b;
+  --accent-wash: #e7dad6;
+  --selection: #dfd3cf;
+
+  --font-read: 'Literata', 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+  --font-mach: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --micro: 0.6875rem;
+  --small: 0.8125rem;
+  --step-0: 1.0625rem;
+  --step-1: 1.1875rem;
+  --step-2: 1.4375rem;
+  --step-3: 1.875rem;
+  --step-4: 2.5rem;
+
+  --measure: 38em;
+  --shell: 62rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ground: #131512;
+    --surface: #1b1e1a;
+    --sunk: #101210;
+    --ink: #e3e5dd;
+    --ink-mid: #a9afa4;
+    --ink-soft: #7c837a;
+    --rule: #2b2f29;
+    --rule-strong: #3d4239;
+    --accent: #d97460;
+    --accent-quiet: #a8503f;
+    --accent-wash: #2e211d;
+    --selection: #3a2a25;
+  }
+}
+
+@theme inline {
+  --color-ground: var(--ground);
+  --color-surface: var(--surface);
+  --color-sunk: var(--sunk);
+  --color-ink: var(--ink);
+  --color-ink-mid: var(--ink-mid);
+  --color-ink-soft: var(--ink-soft);
+  --color-rule: var(--rule);
+  --color-rule-strong: var(--rule-strong);
+  --color-accent: var(--accent);
+  --color-accent-quiet: var(--accent-quiet);
+  --color-accent-wash: var(--accent-wash);
+
+  --font-read: var(--font-read);
+  --font-mach: var(--font-mach);
+
+  --text-micro: var(--micro);
+  --text-small: var(--small);
+  --text-step-0: var(--step-0);
+  --text-step-1: var(--step-1);
+  --text-step-2: var(--step-2);
+  --text-step-3: var(--step-3);
+  --text-step-4: var(--step-4);
+}
+
+/* ------------------------------------------------------------------ base -- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--font-read);
+  font-size: var(--step-0);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--selection);
+}
+
+a {
+  color: inherit;
+  text-decoration-color: var(--rule-strong);
+  text-underline-offset: 0.18em;
+}
+
+a:hover {
+  color: var(--accent);
+  text-decoration-color: var(--accent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 1px;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  margin: 0;
+}
+
+/* Digits that sit in columns must not jitter between rows. */
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+/* --------------------------------------------------------------- reading -- */
+
+.prose {
+  max-width: var(--measure);
+  display: flex;
+  flex-direction: column;
+  gap: 1.15em;
+}
+
+.prose > * {
+  margin: 0;
+}
+
+.prose h2,
+.prose h3 {
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  margin-top: 0.6em;
+}
+
+.prose h2 {
+  font-size: var(--step-2);
+}
+
+.prose h3 {
+  font-size: var(--step-1);
+}
+
+.prose a {
+  text-decoration: underline;
+  text-decoration-color: var(--accent-quiet);
+}
+
+.prose strong {
+  font-weight: 600;
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.15em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4em;
+}
+
+.prose li::marker {
+  color: var(--ink-soft);
+}
+
+.prose blockquote {
+  border-left: 2px solid var(--accent-quiet);
+  padding-left: 1em;
+  color: var(--ink-mid);
+  font-style: italic;
+}
+
+.prose blockquote p {
+  margin: 0;
+}
+
+.prose :not(pre) > code {
+  font-family: var(--font-mach);
+  font-size: 0.86em;
+  background: var(--sunk);
+  padding: 0.1em 0.32em;
+  border-radius: 2px;
+}
+
+.prose pre {
+  font-family: var(--font-mach);
+  font-size: var(--small);
+  line-height: 1.55;
+  background: var(--sunk);
+  border-left: 2px solid var(--rule-strong);
+  padding: 0.9rem 1rem;
+  overflow-x: auto;
+}
+
+.prose pre code {
+  display: grid;
+  background: none;
+  padding: 0;
+  font-size: inherit;
+}
+
+/* rehype-pretty-code ships both themes as custom properties on every token, so
+   highlighting follows the system theme without a second stylesheet. */
+.prose pre code span {
+  color: var(--shiki-light);
+}
+
+@media (prefers-color-scheme: dark) {
+  .prose pre code span {
+    color: var(--shiki-dark);
+  }
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--small);
+}
+
+.prose th,
+.prose td {
+  text-align: left;
+  padding: 0.55rem 0.75rem 0.55rem 0;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: baseline;
+}
+
+.prose th {
+  font-family: var(--font-mach);
+  font-size: var(--micro);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  font-weight: 400;
+}
+
+/* Wide content scrolls inside its own box; the page itself never does. */
+.scroll-x {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+/* --------------------------------------------------------------- motion -- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------------------------------------------------------------- print -- */
+
+@media print {
+  body {
+    background: #fff;
+    color: #000;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+}

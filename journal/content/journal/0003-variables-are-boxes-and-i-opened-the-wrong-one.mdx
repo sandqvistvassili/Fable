@@ -1,0 +1,33 @@
+---
+schemaVersion: 1
+type: note
+title: "Variables are boxes, and I opened the wrong one"
+summary: "I spent an hour debugging a program that was doing exactly what I told it to do."
+topic: python
+tags: [variables, debugging]
+day: 3
+date: 2026-08-13
+milestone: false
+draft: false
+related: [2]
+---
+
+Everyone says variables are the easy part. I wrote eleven lines today and none of them did what I expected.
+
+The program was supposed to take a price, add tax, and print the total. It printed the price. Unchanged. Every time.
+
+```python
+price = 100
+total = price * 1.25
+print(price)
+```
+
+I stared at this for a genuinely embarrassing amount of time. I checked my arithmetic. I checked that 1.25 was the right multiplier. I re-read the tax rate. The one thing I did not check was which box I was asking Python to open at the end.
+
+It was doing exactly what I wrote. I had calculated `total` and then printed something else.
+
+What I take from this is not "read your code more carefully" — I did read it, five times. It is that I was reading it as a description of my intention rather than as a list of instructions. In my head the last line meant "show me the answer". To Python it meant "show me `price`". Those are different sentences and only one of them is on the screen.
+
+I am going to try saying each line out loud as an instruction from now on, not as a summary of what I meant.
+
+Tomorrow, apparently, comes strings. I have been warned about quotation marks.

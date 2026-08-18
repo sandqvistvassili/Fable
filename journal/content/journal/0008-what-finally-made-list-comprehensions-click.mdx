@@ -1,0 +1,29 @@
+---
+schemaVersion: 1
+type: note
+title: "What finally made list comprehensions click"
+summary: "I rewrote the same loop four times before I realised I had been reading it backwards."
+topic: python
+tags: [lists, readability]
+day: 8
+date: 2026-08-18
+milestone: false
+draft: false
+related: [6, 3]
+---
+
+For a week I have been avoiding list comprehensions. Every time one appeared in someone else's code I mentally replaced it with a `for` loop and moved on. Today I stopped avoiding it.
+
+What confused me was the order. In a normal loop I write the condition first and the result last. In a comprehension the result comes first, which felt like reading a sentence from the end.
+
+```python
+squares = [n * n for n in numbers if n % 2 == 0]
+```
+
+Then I read it out loud in the order I would have written the loop: for every number in numbers, if it is even, give me its square. It was not backwards at all. Same sentence — the answer has simply been moved to the front, the way a newspaper headline puts the outcome before the explanation.
+
+I rewrote four of my old loops as comprehensions. Two of them got clearer. The other two got worse: three conditions stacked into a single line that I could not read a minute later. I put those back.
+
+That is the real lesson today. A comprehension is not a better loop. It is a shorter way to say a simple thing, and a bad way to say a complicated one. The choice is about the reader, not about looking clever.
+
+Tomorrow: dictionaries. I already know I am going to confuse keys and values at least once.

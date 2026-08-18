@@ -1,0 +1,49 @@
+---
+schemaVersion: 1
+type: article
+title: "How this journal works"
+summary: "The rules, the daily ritual, and the machinery behind a public learning journal — written down once so I can point at it."
+slug: how-this-journal-works
+topic: life
+tags: [meta, workflow, learning-in-public]
+day: 9
+date: 2026-08-18
+milestone: false
+draft: false
+related: [1]
+---
+
+This site is a public record of learning to code, written one day at a time. This page explains the system behind it — partly for anyone curious, mostly so future-me cannot quietly renegotiate the rules.
+
+## The rules
+
+**One day, one entry.** Between 150 and 300 words, in English, about what actually happened: what I studied, what confused me, what finally made sense. If the day went badly, the entry says so. The numbering counts entries, not calendar days — a missed day does not reset anything, it just means the next entry comes a day later. Guilt is not part of the system.
+
+**The title is the finding, never the number.** "Day 12" tells you nothing. "What finally made list comprehensions click" tells you whether to read it. The day number lives in the metadata, where machine-facts belong.
+
+**Written here first.** This site is the canonical archive. The same text goes out to LinkedIn as a post and to X as a thread, but those are copies for distribution. Platforms change their rules; this domain is mine.
+
+## The daily ritual
+
+About fifteen minutes, most of it writing:
+
+1. During the day: two or three lines of notes on my phone.
+2. In the evening: `npm run new` scaffolds the entry — day number, date, template.
+3. Write 150–300 words. Fill in a one-sentence summary.
+4. `npm run check` — the build refuses anything with missing metadata, an over-long title, or a broken day sequence.
+5. Commit, push. The site deploys itself.
+6. Copy the generated LinkedIn post and X thread from the entry's share page.
+
+Step 4 is the quiet hero. Every entry needs exactly four decisions from me — title, summary, topic, tags — and everything else (URL, description, feeds, sitemaps, share cards) is derived automatically. I cannot forget the SEO because I am not allowed to touch it.
+
+## The machinery
+
+Plain MDX files in a git repository. No database, no CMS, no accounts, no server — the site compiles to static files, so there is nothing to hack and nothing to maintain at 2 a.m. The build validates every entry against a schema, generates an index, renders a share image per entry, and produces the RSS feed and sitemap. The whole thing is open source.
+
+The stack is Next.js, TypeScript and Tailwind, which is a longer word count than the site deserves: it is fundamentally a folder of text files with a nice reading view.
+
+## Why public
+
+Because the private version failed twice. A private plan costs nothing to abandon; a numbered public record is embarrassing to walk away from, and embarrassment turns out to be a renewable resource. Beyond that, after enough days the archive becomes the one credential that cannot be faked: proof of showing up, dated and in order.
+
+If you are reading this deciding whether to start your own — start. The tooling matters far less than the number on tomorrow's entry.

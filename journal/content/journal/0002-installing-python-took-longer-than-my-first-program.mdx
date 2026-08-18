@@ -1,0 +1,38 @@
+---
+schemaVersion: 1
+type: note
+title: "Installing Python took longer than my first program"
+summary: "Two hours of paths and versions, then four seconds of actual programming."
+topic: python
+tags: [setup, terminal]
+day: 2
+date: 2026-08-12
+milestone: false
+draft: false
+related: [1]
+---
+
+Today's plan was one line long: install Python. It took two hours.
+
+Not because installing is hard, but because I did not understand what I was installing. I already had a Python on this machine, apparently, and the terminal kept answering a different version than the one I had just downloaded. I read about PATH four times before the sentence stopped being noise.
+
+What finally helped was giving up on understanding it fully and just checking what the computer thought:
+
+```bash
+which python3
+python3 --version
+```
+
+Two commands. They told me exactly which file was answering and which version it was. Everything I had been guessing at for an hour was printed in two lines.
+
+Then I wrote the actual program:
+
+```python
+print("Hello, Vassili")
+```
+
+Four seconds. It worked the first time. I sat there feeling slightly cheated, because the hard part had nothing to do with programming and everything to do with not knowing how to ask my own computer a question.
+
+I think that is going to be the pattern for a while. The language will be the easy half. The environment around it — terminals, paths, versions, tools I have never heard of — is where the hours go.
+
+Tomorrow: variables. I am told they are simple, which after today I am choosing not to believe.

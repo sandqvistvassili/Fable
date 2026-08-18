@@ -1,0 +1,32 @@
+---
+schemaVersion: 1
+type: note
+title: "My first loop, and my first infinite one"
+summary: "I wrote a while loop, forgot to change the thing it was checking, and learned what Ctrl-C is for."
+topic: python
+tags: [loops, mistakes]
+day: 6
+date: 2026-08-16
+milestone: false
+draft: false
+related: [3]
+---
+
+I wrote my first `while` loop today and immediately wrote my first infinite one.
+
+```python
+count = 0
+while count < 5:
+    print("still going")
+```
+
+It printed forever. Thousands of lines, faster than I could read them, and my first genuine moment of panic at a computer in years — because I did not know how to make it stop. I closed the whole terminal window like someone unplugging a machine they are afraid of.
+
+The missing line was obvious once I saw it: nothing ever changed `count`, so the condition stayed true forever. What was less obvious, and more useful, is the general shape of the mistake. A `while` loop has three parts that must agree — something that starts, something that gets checked, something that changes. I had written two of them and assumed the third.
+
+Two things I now know that I did not this morning:
+
+— `Ctrl-C` stops a running program. Closing the window is not required, and I am slightly embarrassed.
+— A `for` loop over a range handles the changing part for you, which is presumably why everyone reaches for it first.
+
+The panic is the part worth recording. Nothing was broken, nothing was lost, and I still reacted as if I had damaged something. I suspect a lot of early learning is just lowering the cost of being wrong until experiments feel cheap.

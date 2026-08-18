@@ -1,0 +1,47 @@
+{
+  "name": "journal",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "node scripts/validate.mjs && node scripts/build-index.mjs && next build && node scripts/build-og.mjs",
+    "start": "npx serve out",
+    "new": "node scripts/new-entry.mjs",
+    "check": "node scripts/validate.mjs && node scripts/build-index.mjs && tsc --noEmit && next build",
+    "stats": "node scripts/stats.mjs",
+    "index": "node scripts/build-index.mjs",
+    "validate": "node scripts/validate.mjs",
+    "test": "vitest run",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@fontsource/jetbrains-mono": "^5.2.5",
+    "@fontsource/literata": "^5.3.0",
+    "@mdx-js/loader": "^3.1.0",
+    "@mdx-js/react": "^3.1.0",
+    "@next/mdx": "^15.4.5",
+    "gray-matter": "^4.0.3",
+    "next": "^15.4.5",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "rehype-pretty-code": "^0.14.0",
+    "rehype-slug": "^6.0.0",
+    "remark-frontmatter": "^5.0.0",
+    "remark-gfm": "^4.0.1",
+    "shiki": "^1.29.2",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2",
+    "@tailwindcss/postcss": "^4.1.11",
+    "@types/mdx": "^2.0.13",
+    "@types/node": "^22.15.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "satori": "^0.12.1",
+    "tailwindcss": "^4.1.11",
+    "typescript": "^5.8.3",
+    "vitest": "^2.1.9"
+  }
+}
